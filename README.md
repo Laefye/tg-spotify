@@ -26,7 +26,7 @@ tg-spotify is a project that updates your Telegram bio with your current Spotify
 ## Usage
 To (re)generate the configuration file, you need to set up the config:
 ```sh
-docker exec -it tg-spotify python3 main.py generate
+docker exec -it tg-spotify /app/venv/bin/python3 main.py generate
 ```
 
 ## Note

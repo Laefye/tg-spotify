@@ -50,7 +50,7 @@ async def main():
 
 if __name__ == '__main__':
     if len(argv) > 1 and argv[1] == 'generate':
-        asyncio.run(Generator().generate())
+        asyncio.run(Builder().create_new())
     else:
         asyncio.run(main())
 

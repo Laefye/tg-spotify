@@ -20,7 +20,7 @@ tg-spotify is a project that updates your Telegram bio with your current Spotify
     ```
     Note: The `-it` flag is used to create the configuration file interactively. After the configuration is set up, you can run the container without `-it`:
     ```sh
-    docker run -d --name tg-spotify tg-spotify
+    docker start tg-spotify
     ```
 
 ## Usage

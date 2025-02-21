@@ -16,7 +16,7 @@ tg-spotify is a project that updates your Telegram bio with your current Spotify
 2. Build and run the Docker container:
     ```sh
     docker build -t tg-spotify . 
-    docker run -it --name tg-spotify tg-spotify
+    docker run -it --name tg-spotify -v /path/to/local/storage:/app/storage tg-spotify
     ```
     Note: The `-it` flag is used to create the configuration file interactively. After the configuration is set up, you can run the container without `-it`:
     ```sh

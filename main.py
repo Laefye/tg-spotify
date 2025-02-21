@@ -3,13 +3,15 @@ import logging
 from spotify import Spotify, SpotifyAppInfo, SCOPE_USER_READ_PLAYBACK_STATE, AccessToken, User
 from config import Generator, Builder
 from formating import format
-from signal import signal, SIGINT
+from signal import signal, SIGINT, SIGTERM
 
 from telegram.client import Telegram
 from os import getenv
 from sys import argv
 
 LIBRARY_PATH = getenv('TDLIB_LIBRARY_PATH', None)
+FILES_DIRECTORY = 'storage/.tdlib_files'
+
 
 async def main():
     config = await Builder().build()
@@ -18,7 +20,7 @@ async def main():
         api_hash=config.telegramConfig.api_hash,
         phone=config.telegramConfig.phone,
         database_encryption_key=config.telegramConfig.database_encryption_key,
-        files_directory='/tmp/.tdlib_files/',
+        files_directory=FILES_DIRECTORY,
         library_path=LIBRARY_PATH
     )
     tg.login()
@@ -31,6 +33,7 @@ async def main():
         nonlocal active
         active = False
     signal(SIGINT, handler)
+    signal(SIGTERM, handler)
     while active:
         for i in range(10):
             state = await user.get_playback_state()

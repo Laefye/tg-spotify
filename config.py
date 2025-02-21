@@ -5,7 +5,7 @@ from spotify import SpotifyAppInfo, AccessToken, Spotify, DEFAULT_SCOPES, Spotif
 from json import load, dump
 import os
 
-DEFAULT_CONFIG_LOCATION = 'config.json'
+DEFAULT_CONFIG_LOCATION = 'storage/config.json'
 
 class Generator:
     def __init__(self):
@@ -49,10 +49,12 @@ class Builder:
         self.filename = filename
 
     def load(self) -> Config:
+        os.makedirs(os.path.dirname(self.filename), exist_ok=True)
         with open(self.filename, 'r') as f:
             return Config.from_json(load(f))
         
     def save(self, config: Config):
+        os.makedirs(os.path.dirname(self.filename), exist_ok=True)
         with open(self.filename, 'w') as f:
             dump(config.to_json(), f)
 

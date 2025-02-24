@@ -35,6 +35,7 @@ async def main():
     signal(SIGINT, handler)
     signal(SIGTERM, handler)
     while active:
+        await user.refresh_access_token()
         for i in range(10):
             state = await user.get_playback_state()
             if state != previous_format:
@@ -43,7 +44,6 @@ async def main():
             if not active:
                 break
             await asyncio.sleep(10)
-        await user.refresh_access_token()
     result = tg.call_method('setBio', params={'bio': format(None)})
     result.wait()
    
